@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	    <title>Chatty</title>
+
+	    <!-- Bootstrap -->
+	    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	    <!-- CUSTOM CSS -->
+	    <link href="css/index.css" rel="stylesheet">
+
+
+		<!--FIREBASE-->
+		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
+
+		<!-- Leave out Storage -->
+		<!-- <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-storage.js"></script> -->
+		
+		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+
+
+		<!--JQUERY-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="./js/moment.js"></script>
+		<script src="./js/firebase.js"></script>
+
+	</head>
+
+	<body>	
+		<div class="container" id="header">
+			<div class="row">
+				<div class="col-xs-12">
+					<h1 id="header_chatty">Chatty: Twitter's Sister</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="container" id="container_tweets">
+			<div class="row">
+				<div class="col-xs-6 col-xs-offset-3" id="container_tweetbox">
+					<input class="input" id="input_tweet" maxlength="100" placeholder="What's Happening?"></input>
+				</div>
+
+			</div>
+			
+			<div class="row">
+				<div id="tweetlist"></div>
+			</div>
+		</div>
+
+	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	</body>
+</html>

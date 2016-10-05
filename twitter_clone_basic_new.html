@@ -1,0 +1,78 @@
+<head>
+	<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script> 
+	var config = {
+		//apiKey: "AIzaSyBDgHk3_m-vqyUbTGIqgCZ8qAb-CoY5ID4",
+		authDomain: "luminous-torch-6850.firebaseapp.com",
+		databaseURL: "https://luminous-torch-6850.firebaseio.com",
+		storageBucket: "bucket.appspot.com"
+	};
+	
+    firebase.initializeApp(config);
+	// https://firebase.google.com/docs/reference/js/firebase.database.Reference
+	var chattyref = firebase.database().ref('chatty/'); 
+	
+	// from 
+	// http://stackoverflow.com/questions/4878756/javascript-how-to-capitalize-first-letter-of-each-word-like-a-2-word-city
+	function capitalizeFirst(str)
+	{
+		return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	}
+	function addtweet (message) 
+	{
+		// get a random user. 
+		// note something important here.  I put the code to write the
+		// tweet inside the callback for the ajax request.  
+		// this is simplistic, but it makes sure that I've got the 
+		// random person back before I try to write to the database. 
+		$.ajax({
+			url: 'https://randomuser.me/api/?nat=us,gb,fr,br,es',
+			dataType: 'json',
+			success: function(data) {
+				console.log (data);
+				var name = data.results[0].name; 
+				var randomUserName = name.first + " " + 
+									 name.last;
+				var location = data.results[0].location; 
+				var message = "I've always wanted to vist " + 
+						       capitalizeFirst(location.city) 
+							   + " in " + 
+							   capitalizeFirst(location.state); 
+				console.log('name is '+randomUserName);
+				console.log ("writing"); 
+				// https://firebase.google.com/docs/reference/js/firebase.database.Reference#push
+				var newTweetRef = chattyref.push(); 
+				newTweetRef.set ({
+					'message': message, 
+					'sender': randomUserName}); 
+				console.log ("written"); 
+			}
+		});
+	}
+	
+	// see https://firebase.google.com/docs/database/web/retrieve-data
+	function startTweetListener () 
+	{ 
+		chattyref.on('child_added', function (tweet) { 
+				var message = tweet.val().message; 
+				console.log ('message: '+message); 
+				$("#tweetlist").append('<p>tweeted: '+message +'</p>'); 
+		}); 
+	}
+  	
+	$( document ).ready(function() {
+		console.log ('database: '+firebase.database.app); 
+		// note that the tweetlister may start before the tweet is added
+		// because the random name generator might take some time to respond.
+		addtweet (); 
+		startTweetListener (); 
+	}); 
+	</script>
+	
+	
+</head>
+<body>
+<h1>Chatty:  the twitter clone</h1>
+<div id="tweetlist">tweets go here</div>
+</body>
