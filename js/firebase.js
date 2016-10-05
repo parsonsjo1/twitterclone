@@ -8,6 +8,8 @@ var config = {
 firebase.initializeApp(config);
 // https://firebase.google.com/docs/reference/js/firebase.database.Reference
 var chattyref = firebase.database().ref('chattyJoshy/'); 
+//default
+var sender = "parsonsjo1";
 moment().format();
 
 // from 
@@ -40,15 +42,11 @@ function addtweet (message)
 	// https://firebase.google.com/docs/reference/js/firebase.database.Reference#push
 	var newTweetRef = chattyref.push(); 
 	var timeStamp = moment().format('MMMM Do YYYY, h:mm:ss a');
-	var sender = "parsonsjo1";
 	newTweetRef.set ({
 		'message': message, 
 		'sender': sender,
 		'timeStamp' : timeStamp});
 	console.log ("written at: " + timeStamp); 
-
-	//Clear out the input box
-	$("#input_tweet").val("");
 	//	}
 	//});
 }
@@ -71,14 +69,18 @@ $( document ).ready(function() {
 
 		if(event.key == "Enter")
 		{
-			if($("#input_tweet").val() == "clear")
+			//set user command
+			if($("#input_tweet").val().substring(0, 9) == "set_user:")
+				sender = $("#input_tweet").val().substring(9, $("#input_tweet").val().length);
+			//clear command
+			else if($("#input_tweet").val() == "clear_admin")
 			{
 				$("#tweetlist").empty();
 				chattyref.set({});
-				$("#input_tweet").val("");
 			}
 			else
 				addtweet($('#input_tweet').val());
+			$("#input_tweet").val("");
 		}
 		// note that the tweetlister may start before the tweet is added
 		// because the random name generator might take some time to respond.
