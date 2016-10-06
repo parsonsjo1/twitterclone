@@ -9,9 +9,12 @@
 
 	    <!-- Bootstrap -->
 	    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+	   
 	    <!-- CUSTOM CSS -->
 	    <link href="css/index.css" rel="stylesheet">
+
+	    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Scope+One" rel="stylesheet">
 
 
 		<!--FIREBASE-->
@@ -36,20 +39,27 @@
 		<div class="container" id="header">
 			<div class="row">
 				<div class="col-xs-12">
-					<h1 id="header_chatty">Chatty: Twitter's Sister</h1>
+					<h1 id="header_chatty">Chatty: Twitter's Ugly Sister</h1>
 				</div>
 			</div>
 		</div>
 
 		<div class="container" id="container_tweets">
 			<div class="row">
-				<div class="col-xs-6 col-xs-offset-3" id="container_tweetbox">
-					<input class="input" id="input_tweet" maxlength="100" placeholder="What's Happening?"></input>
+				<div class="col-xs-6 col-xs-offset-3" id="tweetbox">
+					<div class="col-xs-12 tweetbox_child">
+						<input class="input" id="input_tweet" maxlength="100" placeholder="What's Happening?"></input>
+					</div>
+					<div class="col-xs-8 more_info tweetbox_child">
+						<input class="input" id="input_sender" maxlength="30" placeholder="What's Your Name?"></input>
+					</div>
+					<div class="col-xs-4 more_info tweetbox_child">
+						<button class="button fa fa-twitter" id="button_tweet">Twit</button>
+					</div>
 				</div>
-
 			</div>
 			
-			<div class="row">
+			<div class="row" id="row_tweets">
 				<div id="tweetlist"></div>
 			</div>
 		</div>
