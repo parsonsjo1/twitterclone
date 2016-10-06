@@ -63,7 +63,6 @@ function startTweetListener ()
 $( document ).ready(function() {
 	startTweetListener (); 
 
-	$("#input_tweet").focus();
 	//Hide tweet box
 	$(".more_info").hide();
 
