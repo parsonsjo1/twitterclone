@@ -7,7 +7,7 @@ var config = {
 
 firebase.initializeApp(config);
 // https://firebase.google.com/docs/reference/js/firebase.database.Reference
-var chattyref = firebase.database().ref('chattyJoshy/'); 
+var chattyref = firebase.database().ref('chatty/'); 
 
 moment().format();
 
@@ -37,27 +37,31 @@ function startTweetListener ()
 	var list = chattyref.orderByChild('timeStamp').on('child_added', function (tweet) { 
 			var sender = tweet.val().sender;
 			var message = tweet.val().message; 
+			var inReplyTo = "";
 			var timeStamp = tweet.val().timeStamp;
+			var key = tweet.key;
 			$("#tweetlist").prepend(
 										'<div class="col-xs-6 col-xs-offset-3 tweet">' +
 											'<p><div class="col-xs-12" id="sender">' + sender + '</div>' +
 											'<div class="col-xs-10 col-xs-offset-1" id="message">'+ message + '</div>' +
-											'<div class="col-xs-6 col-xs-offset-7" id="timeStamp">' + timeStamp + '</div></p>' +
+											'<div class="col-xs-10 col-xs-offset-1" id="message">'+ inReplyTo + '</div>' +
+											'<div class="col-xs-4 col-xs-offset-8" id="timeStamp">' + timeStamp + '</div></p>' +
 											'<div class="row">' +
-												'<div class="col-xs-4 icons">' +
-													'<span class="fa fa-reply" aria-hidden="true"></span>' +
+												'<div class="col-xs-4 icons" id="icons_reply">' +
+													'<div class="fa fa-reply" aria-hidden="true"></div>' +
 												'</div>' + 
-												'<div class="col-xs-4 icons">' +
-													'<span class="fa fa-heart" aria-hidden="true"></span>' +
+												'<div class="col-xs-4 icons" id="icons_heart">' +
+													'<div class="fa fa-heart" aria-hidden="true"></div>' +
 												'</div>' +
-												'<div class="col-xs-4 icons">' +
-													'<span class="fa fa-trash" aria-hidden="true"></span>' +
+												'<div class="col-xs-4 icons" id="icons_trash">' +
+													'<div class="fa fa-trash" id="' + key + '" aria-hidden="true"></div>' +
 												'</div>' +
 											'</div>' +
 										'</div>'
 
 									); 
-	}); 
+	});
+
 }
 	
 $( document ).ready(function() {
@@ -76,7 +80,7 @@ $( document ).ready(function() {
 			if($("#input_tweet").val() == "admin_clear")
 			{
 				$("#tweetlist").empty();
-				chattyref.set({});
+				chattyref.set(null);
 			}
 			else
 				addtweet($('#input_tweet').val());
@@ -85,7 +89,7 @@ $( document ).ready(function() {
 		// note that the tweetlister may start before the tweet is added
 		// because the random name generator might take some time to respond.
 		//addtweet ($('#input_tweet').val()); 
-	})
+	});
 
 	//User activated the input box
 	$("#input_tweet").focus(function(event) {
@@ -107,7 +111,19 @@ $( document ).ready(function() {
 		}, 0);	
 	});
 
-	//User pushed the delete button
+	$("#button_tweet").click(function(){
+		addtweet($('#input_tweet').val());
+		$("#input_tweet").val("");
+	}); 
+	
+	//User pushed the delete button; Using body to delegate for dynamic buttons
+	$('body').on('click', '#icons_trash', function(event){
+		//delete tweet
+		console.log($(event.target).closest("fa"));
+		if(1 == 0) {
+			chattyref.remove(event.key);
+		}
+	}); 
 
 	//User pushed the thumbs up
 
