@@ -11,10 +11,14 @@ body {
 	background-color: #CB5671;
 }
 
-#container_tweets {
+#container_tweets, #container_counter {
 	margin: 0 auto;
 	font-family: 'Scope One', serif;
 	font-weight: 900;
+}
+
+#container_counter {
+	margin-top: 10px;
 }
 
 #sender {
@@ -28,6 +32,7 @@ body {
 
 #timeStamp {
 	font-size: 10px;
+
 }
 
 ::-webkit-input-placeholder {
@@ -46,27 +51,33 @@ body {
    color: #CB5671;  
 }
 
-#tweetbox{
+#replybox {
+	display: none;
+	border-radius: 5px;
+}
+
+#tweetbox, #replybox, #counterbox {
 	margin-top: 10px;
 	padding-bottom: 10px;
 	background-color: white;
+	border-radius: 5px;
 }
 
-#input_tweet {
+#input_tweet, #input_reply, #input_reply_sub, #input_counter_max {
 	width: 100%;
 	height: 40px;
 	margin-top: 10px;
 	border-radius: 5px;
 }
 
-#input_sender {
+#input_sender, #input_reply_sender, #input_sender_sub {
 	width: 100%;
 	height: 40px;
 	margin-top: 10px;
 	border-radius: 5px;
 }
 
-#button_tweet {
+#button_tweet, #button_reply, #button_plus, #button_minus {
 	width: 100%;
 	height: 40px;
 	margin-top: 10px;
@@ -76,7 +87,7 @@ body {
 
 .tweet {
 	background-color: white;
-	margin-top: 10px;
+	margin-top: 50px;
 	margin-bottom: 10px;
 	border-radius: 5px;
 }
@@ -97,6 +108,16 @@ body {
 .icons:hover {
 	background-color: white;
 	cursor:pointer;
+	border-radius: 5px;
+}
+
+.tweet_reply_container {
+	padding-right: 0px;
+}
+
+.tweet_reply {
+	background-color: white;
+	margin-top: 10px;
 	border-radius: 5px;
 }
 

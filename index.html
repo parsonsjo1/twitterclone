@@ -44,14 +44,30 @@
 			</div>
 		</div>
 
+		<div class="container" id="container_counter">
+			<div class="row">
+				<div class="col-xs-6 col-xs-offset-3" id="counterbox">
+					<div class="col-xs-6">
+						<input class="input" id="input_counter_max" placeholder="Show how many tweets?"></input>
+					</div>
+					<div class="col-xs-3">
+						<button class="button fa fa-plus" id="button_plus"></button>
+					</div>
+					<div class="col-xs-3">
+						<button class="button fa fa-minus" id="button_minus"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="container" id="container_tweets">
 			<div class="row">
 				<div class="col-xs-6 col-xs-offset-3" id="tweetbox">
 					<div class="col-xs-12 tweetbox_child">
-						<input class="input" id="input_tweet" maxlength="100" placeholder="What's Happening?"></input>
+						<input class="input" id="input_tweet" type="text" maxlength="100" placeholder="What's Happening?"></input>
 					</div>
 					<div class="col-xs-8 more_info tweetbox_child">
-						<input class="input" id="input_sender" maxlength="30" placeholder="What's Your Name?"></input>
+						<input class="input" id="input_sender" type="text" maxlength="30" placeholder="What's Your Name?"></input>
 					</div>
 					<div class="col-xs-4 more_info tweetbox_child">
 						<button class="button fa fa-twitter" id="button_tweet">Chirp!</button>
